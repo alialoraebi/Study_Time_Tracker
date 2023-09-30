@@ -79,8 +79,8 @@ public class StudyTimeTrackerApp extends Application {
         timerHistoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Create an HBox to hold the buttons horizontally
-        HBox buttonContainer = new HBox(10); // 10 is the spacing between buttons
-        buttonContainer.setAlignment(Pos.CENTER); // Center align the buttons
+        HBox buttonContainer = new HBox(10);
+        buttonContainer.setAlignment(Pos.CENTER);
 
         // Create a button to refresh the table
         Button refreshButton = new Button("Refresh Table");
@@ -95,11 +95,11 @@ public class StudyTimeTrackerApp extends Application {
 
         // Create a VBox to hold the table and the button container
         VBox tableBox = new VBox(10);
-        tableBox.setAlignment(Pos.CENTER); // Center align the table
+        tableBox.setAlignment(Pos.CENTER);
         tableBox.getChildren().addAll(timerHistoryTable, buttonContainer);
 
         VBox root = new VBox(10);
-        root.setAlignment(Pos.CENTER); // Center align the entire content
+        root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(20));
         root.getChildren().addAll(timerDisplay, buttonBox, tableBox);
         root.setId("main-container");
@@ -117,7 +117,6 @@ public class StudyTimeTrackerApp extends Application {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Split the line by ',' assuming the format is "start time, end time, total time"
                 String[] parts = line.split(",");
                 if (parts.length == 3) {
                     String startTime = parts[0].substring(parts[0].indexOf(' ') + 1).trim(); // Extract time part
@@ -146,7 +145,6 @@ public class StudyTimeTrackerApp extends Application {
         timerHistoryTable.refresh();
     }
 
-    // Define the action to clear the table
     private void clearTimerHistoryTable() {
         timerHistoryTable.getItems().clear();
     }

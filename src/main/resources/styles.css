@@ -2,27 +2,25 @@
     -fx-background-color: #5073cb;
 }
 
-
 /* Style for the timer display */
 #timerDisplay {
     -fx-font-size: 48px;
 }
 
-
 /* Style for buttons */
 .button {
     -fx-font-size: 12px;
     -fx-padding: 8px 16px;
-    -fx-background-color: #d2af67; /* Change button background color to blue */
-    -fx-text-fill: white; /* Change button text color to white */
+    -fx-background-color: #d2af67;
+    -fx-text-fill: white;
 }
 
 /* Style for the table */
 .table-view {
-    -fx-background-color: #a0b0c5; /* Change table background color */
+    -fx-background-color: #a0b0c5;
 }
 
 /* Style for table columns */
 .table-column {
-    -fx-alignment: CENTER; /* Center-align table column content */
+    -fx-alignment: CENTER;
 }
