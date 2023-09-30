@@ -44,8 +44,6 @@ public class StudyTimeTrackerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-
         primaryStage.setTitle("Study Time Tracker");
         timerDisplay = new Text("00:00:00");
         timerDisplay.setFont(Font.font(48));
@@ -84,23 +82,21 @@ public class StudyTimeTrackerApp extends Application {
         HBox buttonContainer = new HBox(10); // 10 is the spacing between buttons
         buttonContainer.setAlignment(Pos.CENTER); // Center align the buttons
 
-    // Create a button to refresh the table
+        // Create a button to refresh the table
         Button refreshButton = new Button("Refresh Table");
         refreshButton.setOnAction(e -> refreshTimerHistoryTable());
 
-    // Create a button to clear the table
+        // Create a button to clear the table
         Button clearButton = new Button("Clear Table");
         clearButton.setOnAction(e -> clearTimerHistoryTable());
 
-    // Add the buttons to the button container
+        // Add the buttons to the button container
         buttonContainer.getChildren().addAll(refreshButton, clearButton);
 
-    // Create a VBox to hold the table and the button container
+        // Create a VBox to hold the table and the button container
         VBox tableBox = new VBox(10);
         tableBox.setAlignment(Pos.CENTER); // Center align the table
         tableBox.getChildren().addAll(timerHistoryTable, buttonContainer);
-
-
 
         VBox root = new VBox(10);
         root.setAlignment(Pos.CENTER); // Center align the entire content
