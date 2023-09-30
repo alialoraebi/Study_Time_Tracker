@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,18 +38,18 @@ public class StudyTimeTrackerApp extends Application {
     private String startTime;
     private TableView<TimerRecord> timerHistoryTable;
 
-
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Study Time Tracker");
 
+
+        primaryStage.setTitle("Study Time Tracker");
         timerDisplay = new Text("00:00:00");
         timerDisplay.setFont(Font.font(48));
+        timerDisplay.setId("timerDisplay");
 
         startButton = new Button("Start");
         Button stopButton = new Button("Stop");
@@ -79,26 +80,40 @@ public class StudyTimeTrackerApp extends Application {
         // Remove the 4th empty column
         timerHistoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        // Create a button to refresh the table (if needed)
+        // Create an HBox to hold the buttons horizontally
+        HBox buttonContainer = new HBox(10); // 10 is the spacing between buttons
+        buttonContainer.setAlignment(Pos.CENTER); // Center align the buttons
+
+    // Create a button to refresh the table
         Button refreshButton = new Button("Refresh Table");
         refreshButton.setOnAction(e -> refreshTimerHistoryTable());
 
-        // Create a VBox to hold the table and button
+    // Create a button to clear the table
+        Button clearButton = new Button("Clear Table");
+        clearButton.setOnAction(e -> clearTimerHistoryTable());
+
+    // Add the buttons to the button container
+        buttonContainer.getChildren().addAll(refreshButton, clearButton);
+
+    // Create a VBox to hold the table and the button container
         VBox tableBox = new VBox(10);
-        tableBox.getChildren().addAll(timerHistoryTable, refreshButton);
+        tableBox.setAlignment(Pos.CENTER); // Center align the table
+        tableBox.getChildren().addAll(timerHistoryTable, buttonContainer);
+
+
 
         VBox root = new VBox(10);
         root.setAlignment(Pos.CENTER); // Center align the entire content
         root.setPadding(new Insets(20));
         root.getChildren().addAll(timerDisplay, buttonBox, tableBox);
+        root.setId("main-container");
 
         Scene scene = new Scene(root, 500, 300);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         primaryStage.setScene(scene);
 
         primaryStage.show();
     }
-
-
 
     private List<TimerRecord> readTimerRecordsFromFile(String filePath) {
         List<TimerRecord> records = new ArrayList<>();
@@ -135,6 +150,10 @@ public class StudyTimeTrackerApp extends Application {
         timerHistoryTable.refresh();
     }
 
+    // Define the action to clear the table
+    private void clearTimerHistoryTable() {
+        timerHistoryTable.getItems().clear();
+    }
 
     private void setupTimer() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
@@ -157,10 +176,13 @@ public class StudyTimeTrackerApp extends Application {
 
     private void startTimer() {
         setupTimer();
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         startTime = dateFormat.format(new Date());
         timeline.play();
+        timerDisplay.setFill(Color.WHITE);
         startButton.setDisable(true);
+
     }
 
     private void stopTimer() {
@@ -213,5 +235,7 @@ public class StudyTimeTrackerApp extends Application {
         seconds.set(0);
         updateTimeDisplay();
         startButton.setDisable(false);
+        timerDisplay.setFill(Color.BLACK);
+
     }
 }
