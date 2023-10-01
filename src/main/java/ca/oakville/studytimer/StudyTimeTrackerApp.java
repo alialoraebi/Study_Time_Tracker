@@ -104,7 +104,7 @@ public class StudyTimeTrackerApp extends Application {
         root.getChildren().addAll(timerDisplay, buttonBox, tableBox);
         root.setId("main-container");
 
-        Scene scene = new Scene(root, 500, 300);
+        Scene scene = new Scene(root, 500, 350);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         primaryStage.setScene(scene);
 
@@ -146,7 +146,15 @@ public class StudyTimeTrackerApp extends Application {
     }
 
     private void clearTimerHistoryTable() {
-        timerHistoryTable.getItems().clear();
+        try (FileWriter fileWriter = new FileWriter("study_sessions.txt")) {
+            // Clear the content of the file by writing an empty string
+            fileWriter.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle any file-related errors here
+        }
+        // After clearing the file, refresh the table to reflect the changes
+        refreshTimerHistoryTable();
     }
 
     private void setupTimer() {
@@ -230,6 +238,5 @@ public class StudyTimeTrackerApp extends Application {
         updateTimeDisplay();
         startButton.setDisable(false);
         timerDisplay.setFill(Color.BLACK);
-
     }
 }
