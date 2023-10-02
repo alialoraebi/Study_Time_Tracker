@@ -1,4 +1,4 @@
-//Study Timer Tracker App
+//Study Time Tracker App
 //Made by Ali Al Aoraebi
 
 package ca.oakville.studytimer;
