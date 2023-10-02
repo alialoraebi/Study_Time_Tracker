@@ -22,7 +22,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -113,7 +112,6 @@ public class StudyTimeTrackerApp extends Application {
 
     private List<TimerRecord> readTimerRecordsFromFile(String filePath) {
         List<TimerRecord> records = new ArrayList<>();
-
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -178,13 +176,11 @@ public class StudyTimeTrackerApp extends Application {
 
     private void startTimer() {
         setupTimer();
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         startTime = dateFormat.format(new Date());
         timeline.play();
         timerDisplay.setFill(Color.WHITE);
         startButton.setDisable(true);
-
     }
 
     private void stopTimer() {
@@ -225,7 +221,6 @@ public class StudyTimeTrackerApp extends Application {
                 }
             }
         });
-
         // Update the start time to the current time
         startTime = endTime;
         // Enable the "Start" button after stopping
