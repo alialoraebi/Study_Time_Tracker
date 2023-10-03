@@ -29,6 +29,8 @@ import java.util.Date;
 import java.util.List;
 import java.io.IOException;
 
+
+//Hello world
 public class StudyTimeTrackerApp extends Application {
     private SimpleIntegerProperty seconds = new SimpleIntegerProperty(0);
     private Timeline timeline;
